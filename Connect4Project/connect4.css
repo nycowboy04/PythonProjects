@@ -1,0 +1,15 @@
+.turnRed{
+  background-color: 'red';
+}
+
+.turnBlue{
+  background-color: 'blue';
+}
+
+#board button{
+  width: 100px;
+  height: 100px;
+  background-color: gray;
+  margin: 1px;
+  border-radius: 50px;
+}
