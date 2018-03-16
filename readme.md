@@ -1,0 +1,1 @@
+This repository contains various projects in Python, Django, etc. that I have been learning through various media: udemy, various books etc. The purpose of pushing all these files to a remote repository is to 1. enable me to work on the projects both at work and at home, and 2. provide a means of backup, should one of the computers crash on me.
