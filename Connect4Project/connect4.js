@@ -23,7 +23,7 @@ function returnColor(rowIndex,colIndex, color) {
 
 function checkBottom() {
   var colorReport = returnColor(5, colIndex);
-  for (var row = 0, row > -1, row--){
+  for (var row = 0; row > -1; row--){
     colorReport=(row, colIndex);
     if(colorReport==='rgb(128, 128 ,128)'){
       return row;
@@ -50,8 +50,8 @@ function horizontalWinCheck() {
 }
 
 function verticalWinCheck() {
-  for(var col = 0, col<7, col++){
-    for(var row = 0, row < 3, row++){
+  for(var col = 0; col<7; col++){
+    for(var row = 0; row < 3; row++){
       if (colorMatchCheck(returnColor(row,col),returnColor(row+1, col), returnColor(row+2,col), returnColor(row+3,col))) {
           console.log('vertical');
           reportWin(row,col);
@@ -59,6 +59,22 @@ function verticalWinCheck() {
       }else {
         continue;
       }
+    }
+  }
+}
+
+function diagonalWinCheck() {
+  for (var col = 0; col < 5; col++){
+    for(var row = 0; row<7;row++){
+      if colorMatchCheck(returnColor(row,col), returnColor(row+1, col+1),returnColor(row+2, col+2), returnColor(row+3, col+3))){
+        console.log('diag');
+        reportWin(row,col);
+        return true;
+      }
+    } else if (colorMatchCheck(returnColor(row,col), returnColor(row-1,col+1), returnColor(row-2, col+2) returnColor(row-3,col+3))) {
+      console.log('diag');
+      reportWin(row,col);
+      return true;
     }
   }
 }
