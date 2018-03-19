@@ -78,3 +78,29 @@ function diagonalWinCheck() {
     }
   }
 }
+
+var currentPlayer = 1;
+var currentName = Player1;
+var currentColor = player1Color;
+
+$('h3').text(Player1+" it is your turn, pick a column to drop in!")
+$('.board button').on('click',function(){
+  var col = $(this).closest('td').index();
+  var = bottomAvail=checkBottom(col);
+  changeColor(bottomAvail,col,currentColor);
+  if(horizontalWinCheck()||verticalWinCheck()||diagonalWinCheck()){
+    $('h1').text(currentName+"You have won!")
+    $('h3').fadeOut('fast');
+    $('h2').fadeOut('fast');
+  }
+  currentPlayer=currentPlayer*-1;
+  if (currentPlayer===1){
+    currentName=Player1;
+    $('h3').text(currentName+" it is your turn.")
+    currentColor=player1Color;
+  } else {
+    currentName=Player2;
+    $('h3').text(currentName+" it is your turn")
+    currentColor=player2Color;
+  }
+})
