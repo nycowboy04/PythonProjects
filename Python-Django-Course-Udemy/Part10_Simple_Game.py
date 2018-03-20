@@ -35,20 +35,27 @@ def findMatch(lsans,lsgue):
 
     if lsans[0]==lsgue[0] or lsans[1]==lsgue[1] or lsans[2]==lsgue:
         return "Match"
-    elif lsans[0]==lsgue[1] or lsans[0]=lsgue[2] or lsans[1]==lsgue[2]:
+    elif lsans[0]==lsgue[1] or lsans[0]==lsgue[2] or lsans[1]==lsgue[2]:
         return "Close"
     else:
         return "nope"
+
 def isMatch(a,g):
     return a==g
-def main():
-    digits = list(range(10))
+
+def shuffleNumbers():
+    digits=list(range(10))
     random.shuffle(digits)
-    answer=(digits[:3])
-    while not isMatch(answer, guess):
+    return digits[:3]
+
+def main():
+    answer=shuffleNumbers()
+    goal=isMatch(answer,guess)
+    while goal==False:
         lsans=list(answer)
         lsgue=list(guess)
         result=findMatch(lsans,lsgue)
         print(result)
         guess=input("What is your guess? ")
         int(answer)
+        goal=isMatch(answer,guess)
