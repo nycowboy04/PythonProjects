@@ -1,0 +1,1 @@
+This directory has the various projects for the Python-Django full stack developer course from Udemy. The contents herein are my attempts to complete the projects assigned. The foundational material of these projects is not mine, but the producer of the course Jose P. 
