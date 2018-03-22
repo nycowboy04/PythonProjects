@@ -28,6 +28,8 @@ import random
 # should they be in? Maybe some sort of sequence? Watch the Lecture video for more hints!
 
 def findMatch(lsans,lsgue):
+    '''Compare each number in both lists to determine where there's a match, if any.'''
+
     if lsans[0]==lsgue[0] or lsans[1]==lsgue[1] or lsans[2]==lsgue[2]:
         return "Match"
     elif lsans[0]==lsgue[1] or lsans[0]==lsgue[2] or lsans[1]==lsgue[2] or lsans[1]==lsgue[0] or lsans[2]==lsgue[0] or lsans[2]==lsgue[1]:
@@ -36,18 +38,21 @@ def findMatch(lsans,lsgue):
         return "nope"
 
 def isMatch(a,g):
+    '''determines if the two lists are exact matches'''
     if a==g:
         return True
     else:
         return False
 
 def shuffleNumbers():
+    '''creates a random list of three digits'''
     digits=list(range(10))
     random.shuffle(digits)
     return digits[:3]
 
 def getGuess():
-    Nu=list(input("what is your guess? "))
+    '''prompts user for data entry'''
+    Nu=list(input("what is your guess? Enter a 3-digit number. "))
     print("The Number you entered was: "+ "".join(Nu))
     return Nu
 
