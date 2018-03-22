@@ -32,30 +32,34 @@ print(guess)
 # should they be in? Maybe some sort of sequence? Watch the Lecture video for more hints!
 
 def findMatch(lsans,lsgue):
-
     if lsans[0]==lsgue[0] or lsans[1]==lsgue[1] or lsans[2]==lsgue:
         return "Match"
-    elif lsans[0]==lsgue[1] or lsans[0]==lsgue[2] or lsans[1]==lsgue[2]:
+    elif lsans[0]==lsgue[1] or lsans[0]==lsgue[2] or lsans[1]==lsgue[2] or lsans[1]==lsgue[0] or lsans[2]==lsgue[0] or lsans[2]==lsgue[1]:
         return "Close"
     else:
         return "nope"
 
 def isMatch(a,g):
-    return a==g
+    if a==g:
+        return "Correct!"
+    else:
+        return False
 
 def shuffleNumbers():
     digits=list(range(10))
     random.shuffle(digits)
     return digits[:3]
 
-def main():
-    answer=shuffleNumbers()
+def getGuess():
+    Nu=list(input("what is your guess? "))
+    return Nu
+
+
+answer=shuffleNumbers()
+guess=getGuess()
+goal=isMatch(answer,guess)
+while not goal:
+    result=findMatch(answer,guess)
+    print(result)
+    guess=getGuess()
     goal=isMatch(answer,guess)
-    while goal==False:
-        lsans=list(answer)
-        lsgue=list(guess)
-        result=findMatch(lsans,lsgue)
-        print(result)
-        guess=input("What is your guess? ")
-        int(answer)
-        goal=isMatch(answer,guess)
