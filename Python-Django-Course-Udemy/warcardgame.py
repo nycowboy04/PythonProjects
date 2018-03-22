@@ -50,18 +50,29 @@ class Deck():
 
     def shuffling(self):
         deck=shuffle(deck)
+        return deck
 
     def split(self):
         player1=deck[::2]
         player2=deck[1::2]
-
+        return player1, player2
 class Hand(Deck):
     '''
     This is the Hand class. Each player has a Hand, and can add or remove
     cards from that hand. There should be an add and remove card method here.
     '''
-    pass
+
     def __init__(self):
+        hand=self.hand
+
+
+    def play_card(self):
+        card=hand.pop()
+        return card
+
+    def add_card(self, cards):
+        return hand.append(cards)
+
 
 
 class Player(Hand):
@@ -69,15 +80,30 @@ class Player(Hand):
     This is the Player class, which takes in a name and an instance of a Hand
     class object. The Payer can then play cards and check if they still have cards.
     """
-    pass
+
     def __init__(self, name):
         name=self.name
-        hand.__init__(self):
+
+    def check_hand(self):
+        if len(Player.hand)==0:
+            print("You have lost the game, {}".format(Player.name))
+
+
 
 
 ######################
 #### GAME PLAY #######
 ######################
 print("Welcome to War, let's begin...")
+
+p1=input("Player 1, please enter your name")
+Player1=Player(p1)
+p2=input("Player 2, please enter your name")
+Player2=Player(p2)
+
+
+deck.shuffling()
+Player1.hand=split(player1)
+Player2.hand=split(player2)
 
 # Use the 3 classes along with some logic to play a game of war!
