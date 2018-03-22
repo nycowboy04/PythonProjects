@@ -47,6 +47,7 @@ class Deck():
         for item in SUIT:
             for card in RANKS:
                 deck+="".join(item,card)
+        return deck
 
     def shuffling(self):
         deck=shuffle(deck)
