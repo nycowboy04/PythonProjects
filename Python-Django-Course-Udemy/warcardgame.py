@@ -53,10 +53,13 @@ class Deck():
         deck=shuffle(deck)
         return deck
 
-    def split(self):
-        player1=deck[::2]
-        player2=deck[1::2]
-        return player1, player2
+    def split(self, player):
+        if player==Player1:
+            player.hand=deck[::2]
+        else:
+            player.hand=deck[1::2]
+        return player.hand
+
 class Hand(Deck):
     '''
     This is the Hand class. Each player has a Hand, and can add or remove
