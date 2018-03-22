@@ -51,12 +51,14 @@ def getGuess():
     print("The Number you entered was: "+ "".join(Nu))
     return Nu
 
-
-answer=shuffleNumbers()
-guess=getGuess()
-goal=isMatch(answer,guess)
-while not goal:
-    result=findMatch(answer,guess)
-    print(result)
+def main():
+    answer=shuffleNumbers()
     guess=getGuess()
     goal=isMatch(answer,guess)
+    while not goal:
+        result=findMatch(answer,guess)
+        print(result)
+        guess=getGuess()
+        goal=isMatch(answer,guess)
+
+main()
