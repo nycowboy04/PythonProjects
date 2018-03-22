@@ -24,15 +24,11 @@
 # Try to figure out what this code is doing and how it might be useful to you
 import random
 
-# Another hint:
-guess = input("What is your guess? ")
-print(guess)
-
 # Think about how you will compare the input to the random number, what format
 # should they be in? Maybe some sort of sequence? Watch the Lecture video for more hints!
 
 def findMatch(lsans,lsgue):
-    if lsans[0]==lsgue[0] or lsans[1]==lsgue[1] or lsans[2]==lsgue:
+    if lsans[0]==lsgue[0] or lsans[1]==lsgue[1] or lsans[2]==lsgue[2]:
         return "Match"
     elif lsans[0]==lsgue[1] or lsans[0]==lsgue[2] or lsans[1]==lsgue[2] or lsans[1]==lsgue[0] or lsans[2]==lsgue[0] or lsans[2]==lsgue[1]:
         return "Close"
@@ -41,7 +37,7 @@ def findMatch(lsans,lsgue):
 
 def isMatch(a,g):
     if a==g:
-        return "Correct!"
+        return True
     else:
         return False
 
@@ -52,6 +48,7 @@ def shuffleNumbers():
 
 def getGuess():
     Nu=list(input("what is your guess? "))
+    print("The Number you entered was: "+ "".join(Nu))
     return Nu
 
 
