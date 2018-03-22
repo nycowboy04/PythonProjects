@@ -30,19 +30,25 @@ import random
 def findMatch(lsans,lsgue):
     '''Compare each number in both lists to determine where there's a match, if any.'''
 
-    if lsans[0]==lsgue[0] or lsans[1]==lsgue[1] or lsans[2]==lsgue[2]:
-        return "Match"
-    elif lsans[0]==lsgue[1] or lsans[0]==lsgue[2] or lsans[1]==lsgue[2] or lsans[1]==lsgue[0] or lsans[2]==lsgue[0] or lsans[2]==lsgue[1]:
-        return "Close"
-    else:
-        return "nope"
+    clues=[]
+    for ind, num in enumerate(lsgue):
+        if num==lsans[ind]:
+            clues.append('Match')
+        elif num in lsans:
+            clues.append('Close')
 
+        if clues==[]:
+            return ['Nope']
+        else:
+            return clues
 def isMatch(a,g):
     '''determines if the two lists are exact matches'''
+    result = []
     if a==g:
-        return True
+        result =["correct!"]
+        return result
     else:
-        return False
+        return result
 
 def shuffleNumbers():
     '''creates a random list of three digits'''
@@ -60,9 +66,11 @@ def main():
     answer=shuffleNumbers()
     guess=getGuess()
     goal=isMatch(answer,guess)
-    while not goal:
+    while goal != "correct!":
         result=findMatch(answer,guess)
-        print(result)
+        print("Here is the result of your guess: ")
+        for clue in result:
+            print(clue)
         guess=getGuess()
         goal=isMatch(answer,guess)
 
