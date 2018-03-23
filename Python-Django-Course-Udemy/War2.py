@@ -29,22 +29,21 @@
 from random import shuffle
 
 # Two useful variables for creating Cards.
+SUITE = 'H D S C'.split()
+RANKS = '2 3 4 5 6 7 8 9 10 J Q K A'.split()
 
-class Deck():
+class Deck:
     """
     This is the Deck Class. This object will create a deck of cards to initiate
     play. You can then use this Deck list of cards to split in half and give to
     the players. It will use SUITE and RANKS to create the deck. It should also
     have a method for splitting/cutting the deck in half and Shuffling the deck.
     """
-    SUIT = 'H D S C'.split()
-    RANKS = '2 3 4 5 6 7 8 9 10 J Q K A'.split()
-
     def __init__(self):
         deck=[]
 
     def createDeck(self):
-        for item in SUIT:
+        for item in SUITE:
             for card in RANKS:
                 deck+="".join(item,card)
         return deck
@@ -65,28 +64,22 @@ class Hand(Deck):
     This is the Hand class. Each player has a Hand, and can add or remove
     cards from that hand. There should be an add and remove card method here.
     '''
-
     def __init__(self):
         hand=self.hand
 
-
     def play_card(self):
-        card=hand.pop(0)
-        return card
+        return hand.pop(0)
 
     def add_card(self, cards):
         for item in cards:
             hand.append(item)
-        return hand.append(cards)
-
-
+        return hand
 
 class Player(Hand):
     """
     This is the Player class, which takes in a name and an instance of a Hand
     class object. The Payer can then play cards and check if they still have cards.
     """
-
     def __init__(self, name):
         name=self.name
 
@@ -96,44 +89,9 @@ class Player(Hand):
 
 
 
-
 ######################
 #### GAME PLAY #######
 ######################
-P1Card=[]
-P2Card=[]
-def round(P1, P2):
-    P1Card=P1.play_card()
-    P2Card=P2.play_card()
-    if P1Card > P2Card:
-        P1.add_card(P1Card)
-        P1.add_card(P2Card)
-    elif P1Card == P2Card:
-        war(Player1, Player2)
-    else:
-        P2.add_card(P1Card)
-        P2.add_card(P2Card)
-
-def war(P1,P2):
-    p1down=[]
-    p2down=[]
-    for i in range(3):
-        p1down.append(P1.play_card())
-        p2down.append(P2.play_card())
-    P1Card=P1.play_card()
-    P2Card=P2.play_card()
-
-
 print("Welcome to War, let's begin...")
-
-p1=input("Player 1, please enter your name")
-Player1=Player(p1)
-p2=input("Player 2, please enter your name")
-Player2=Player(p2)
-
-deck=Deck()
-deck.shuffling()
-Player1.hand=split('player1')
-Player2.hand=split('player2')
 
 # Use the 3 classes along with some logic to play a game of war!
