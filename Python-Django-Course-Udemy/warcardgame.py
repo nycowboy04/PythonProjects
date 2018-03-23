@@ -54,7 +54,7 @@ class Deck():
         return deck
 
     def split(self, player):
-        if player==Player1:
+        if player=='player1':
             player.hand=deck[::2]
         else:
             player.hand=deck[1::2]
@@ -71,7 +71,7 @@ class Hand(Deck):
 
 
     def play_card(self):
-        card=hand.pop()
+        card=hand.pop(0)
         return card
 
     def add_card(self, cards):
@@ -98,6 +98,18 @@ class Player(Hand):
 ######################
 #### GAME PLAY #######
 ######################
+
+def round(P1, P2):
+    P1Card=P1.play_card()
+    P2Card=P2.play_card()
+    if P1Card > P2Card:
+        P1.add_card(P1Card)
+        P1.add_card(P2Card)
+    elif P1Card == P2Card:
+        war(Player1, Player2)
+    else:
+        P2.add_card(P1Card)
+        P2.add_card(P2Card)
 print("Welcome to War, let's begin...")
 
 p1=input("Player 1, please enter your name")
@@ -105,9 +117,9 @@ Player1=Player(p1)
 p2=input("Player 2, please enter your name")
 Player2=Player(p2)
 
-
+deck=Deck()
 deck.shuffling()
-Player1.hand=split(player1)
-Player2.hand=split(player2)
+Player1.hand=split('player1')
+Player2.hand=split('player2')
 
 # Use the 3 classes along with some logic to play a game of war!
