@@ -94,4 +94,47 @@ class Player(Hand):
 ######################
 print("Welcome to War, let's begin...")
 
+def begin_game():
+    Player1=Player(name=input("Player 1, please enter your name: "))
+    Player2=Player(name=input("Player 2, please enter your name: "))
+
+def setup():
+    print("creating deck...")
+    deck=Deck.createDeck()
+    print("shuffling deck...")
+    deck=Deck.shuffling(deck)
+    print("dealing cards to {} and {}...".format(Player1.name, Player2.name))
+    Player1.hand=Deck.split("player1")
+    Player2.hand=Deck.split("player2")
+    print("Cards dealt. Let's begin!")
+
+def round():
+    tableau=[]
+    P1card=Player1.play_card()
+    P2card=Player2.play_card()
+    tableau.append(P1card)
+    tableau.append(P2card)
+    results=compare (P1card, P2card, tableau)
+    results.add_card(tableau)
+
+def compare(p1card, p2card, tableau):
+    if p1card > p2card:
+        return Player1
+    elif P2card > P1P1card:
+        return Player2
+    else:
+        war(tableau)
+def war(tableau):
+    for i in range(3):
+        tableau.append(Player1.play_card())
+        tableau.append(Player2.play_card())
+
+    p1card=Player1.play_card()
+    p2card=Player2.play_card()
+    results = compare(p1card, p2card, tableau)
+    return results.add_card(tableau)
+
+
+
+
 # Use the 3 classes along with some logic to play a game of war!
