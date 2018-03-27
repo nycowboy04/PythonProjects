@@ -40,100 +40,128 @@ class Deck:
     have a method for splitting/cutting the deck in half and Shuffling the deck.
     """
     def __init__(self):
-        deck=[]
-
-    def createDeck(self):
-        for item in SUITE:
-            for card in RANKS:
-                deck+="".join(item,card)
-        return deck
+        Print("Creating new deck")
+        self.allcards=[(s,r) for s in SUITE for r in RANKS]
 
     def shuffling(self):
-        deck=shuffle(deck)
-        return deck
+        print("Shuffling deck")
+        shuffle(self.allcards)
+
 
     def split(self, player):
-        if player=='player1':
-            player.hand=deck[::2]
-        else:
-            player.hand=deck[1::2]
-        return player.hand
+        return(self.allcards[:26],self.allcards[26:])
 
-class Hand(Deck):
+class Hand:
     '''
     This is the Hand class. Each player has a Hand, and can add or remove
     cards from that hand. There should be an add and remove card method here.
     '''
-    def __init__(self):
-        hand=self.hand
+    def __init__(self, cards):
+        self.cards=cards
 
-    def play_card(self):
-        return hand.pop(0)
+    def __str__(self):
+        return ("Contains {} cards".format(len(self.cards))
 
-    def add_card(self, cards):
-        for item in cards:
-            hand.append(item)
-        return hand
+    def add(self, added_cards):
+        self.card.extend(added_cards)
 
-class Player(Hand):
+    def remove_card(self):
+        return self.cards.pop()
+
+class Player:
     """
     This is the Player class, which takes in a name and an instance of a Hand
     class object. The Payer can then play cards and check if they still have cards.
     """
-    def __init__(self, name):
-        name=self.name
+    def __init__(self, name, hand):
+        self.name=name
+        self.hand=hand
 
-    def check_hand(self):
-        if len(Player.hand)==0:
-            print("You have lost the game, {}".format(Player.name))
+    def play_card(self):
+        drawn_card = self.hand.remove_card()
+        print("{} has played {}".format(self.name, drawn_card))
+        print("/n")
+        return drawn_card
 
+    def draw_war_cards(self):
+        war_cards=[]
+        if len(self.hand.cards)<3:
+            return war_cards
+        else:
+            for x in range(3):
+                war_cards.append(self.hand.cards.pop())
+            return war_cards
+
+    def still_has_cards(self):
+        return len(self.hand.cards != 0)
 
 
 ######################
 #### GAME PLAY #######
 ######################
 print("Welcome to War, let's begin...")
+#create deck and split in half
+player = input("Player, please enter your name: ")
+d=Deck()
+d.shuffling()
+half1, half2=d.split_in_half()
+#Player creation
+comp=Player("computer",Hand(half1))
+user=Player(player,Hand(half2))
 
-def begin_game():
-    Player1=Player(name=input("Player 1, please enter your name: "))
-    Player2=Player(name=input("Player 2, please enter your name: "))
+#set round counts
+round = 0
+war_count=0
 
-def setup():
-    print("creating deck...")
-    deck=Deck.createDeck()
-    print("shuffling deck...")
-    deck=Deck.shuffling(deck)
-    print("dealing cards to {} and {}...".format(Player1.name, Player2.name))
-    Player1.hand=Deck.split("player1")
-    Player2.hand=Deck.split("player2")
-    print("Cards dealt. Let's begin!")
+while user.still_has_cards() and comp.still_has_cards():
+    round+=1
+    print("It's time for a new round.")
+    print("Here are the current standings: "
+    print(user.name+" has "+str(len(user.hand.cards))+" cards remaining.")
+    print(comp.name+" has "+str(len(comp.hand.cards))+" cards remaining.")
+    print('/n')
 
-def round():
+    #cards on table represented by a list
     tableau=[]
-    P1card=Player1.play_card()
-    P2card=Player2.play_card()
-    tableau.append(P1card)
-    tableau.append(P2card)
-    results=compare (P1card, P2card, tableau)
-    results.add_card(tableau)
 
-def compare(p1card, p2card, tableau):
-    if p1card > p2card:
-        return Player1
-    elif P2card > P1P1card:
-        return Player2
+    #cards being played
+    c_card=comp.play_card()
+    u_card=user.play_card()
+
+    #add cards to the tableau list
+    tableau.append(c_card)
+    tableau.append(u_card)
+
+    #Check for War!
+    if p_card[1]==u_card[1]:
+        war_count+=1
+        print("We have a war!")
+        print('Each player places 3 cards "face down" and one card face up.')
+        tableau.extend(user.remove_war_cards())
+        tableau.extend(comp.remove_war_cards())
+
+        c_card=comp.play_card()
+        u_card=user.play_card()
+
+        tableau.append(c_card)
+        tableau.append(u_card)
+
+        if RANKS.index(c_card[1]) < RANKS.index(u_card[1]):
+            print(user.name+' has the higher card. adding to hand')
+            user.hand.add(tableau)
+        else:
+            print(comp.name+' has the higher card. adding to hand...')
+            comp.hand.add(tableau)
     else:
-        war(tableau)
-def war(tableau):
-    for i in range(3):
-        tableau.append(Player1.play_card())
-        tableau.append(Player2.play_card())
+        if RANKS.index(c_card[1]) < RANKS.index(u_card[1]):
+            print(user.name+' has the higher card. adding to hand...')
+            user.hand.add(tableau)
+        else:
+            print(comp.name+' has the higher card. adding to hand...')
+            comp.hand.add(tableau)
 
-    p1card=Player1.play_card()
-    p2card=Player2.play_card()
-    results = compare(p1card, p2card, tableau)
-    return results.add_card(tableau)
-
+print("Great game! This game lasted {} rounds.".format(str(total_rounds)))
+print("A war happend {} times.".format(str(war_count)))
 
 
 
