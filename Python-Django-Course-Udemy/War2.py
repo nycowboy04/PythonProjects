@@ -40,7 +40,7 @@ class Deck:
     have a method for splitting/cutting the deck in half and Shuffling the deck.
     """
     def __init__(self):
-        Print("Creating new deck")
+        print("Creating new deck")
         self.allcards=[(s,r) for s in SUITE for r in RANKS]
 
     def shuffling(self):
@@ -48,7 +48,7 @@ class Deck:
         shuffle(self.allcards)
 
 
-    def split(self, player):
+    def split(self):
         return(self.allcards[:26],self.allcards[26:])
 
 class Hand:
@@ -60,10 +60,10 @@ class Hand:
         self.cards=cards
 
     def __str__(self):
-        return ("Contains {} cards".format(len(self.cards))
+        return ("Contains {} cards".format(len(self.cards)))
 
     def add(self, added_cards):
-        self.card.extend(added_cards)
+        self.cards.extend(added_cards)
 
     def remove_card(self):
         return self.cards.pop()
@@ -93,7 +93,7 @@ class Player:
             return war_cards
 
     def still_has_cards(self):
-        return len(self.hand.cards != 0)
+        return len(self.hand.cards) != 0
 
 
 ######################
@@ -104,7 +104,7 @@ print("Welcome to War, let's begin...")
 player = input("Player, please enter your name: ")
 d=Deck()
 d.shuffling()
-half1, half2=d.split_in_half()
+half1, half2=d.split()
 #Player creation
 comp=Player("computer",Hand(half1))
 user=Player(player,Hand(half2))
@@ -116,7 +116,7 @@ war_count=0
 while user.still_has_cards() and comp.still_has_cards():
     round+=1
     print("It's time for a new round.")
-    print("Here are the current standings: "
+    print("Here are the current standings: ")
     print(user.name+" has "+str(len(user.hand.cards))+" cards remaining.")
     print(comp.name+" has "+str(len(comp.hand.cards))+" cards remaining.")
     print('/n')
@@ -133,12 +133,12 @@ while user.still_has_cards() and comp.still_has_cards():
     tableau.append(u_card)
 
     #Check for War!
-    if p_card[1]==u_card[1]:
+    if c_card[1]==u_card[1]:
         war_count+=1
         print("We have a war!")
         print('Each player places 3 cards "face down" and one card face up.')
-        tableau.extend(user.remove_war_cards())
-        tableau.extend(comp.remove_war_cards())
+        tableau.extend(user.draw_war_cards())
+        tableau.extend(comp.draw_war_cards())
 
         c_card=comp.play_card()
         u_card=user.play_card()
@@ -160,7 +160,7 @@ while user.still_has_cards() and comp.still_has_cards():
             print(comp.name+' has the higher card. adding to hand...')
             comp.hand.add(tableau)
 
-print("Great game! This game lasted {} rounds.".format(str(total_rounds)))
+print("Great game! This game lasted {} rounds.".format(str(round)))
 print("A war happend {} times.".format(str(war_count)))
 
 
