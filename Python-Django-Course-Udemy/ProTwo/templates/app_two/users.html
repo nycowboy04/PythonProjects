@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>users</title>
+  </head>
+  <body>
+    <h1>Here is the user data you requested.</h1>
+    {% if user_record %}
+      <table>
+        <thead>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+        </thead>
+        {% for usr in user_record %}
+          <tr>
+          <td>{{usr.first_name}}</td>
+          <td>{{usr.last_name}}</td>
+          <td>{{usr.email}}</td>
+          </tr>
+        {% endfor %}
+    {% else %}
+        <p>THERE ARE NO USER RECORDS!</p>
+    {% endif %}
+      </table>
+  </body>
+</html>
