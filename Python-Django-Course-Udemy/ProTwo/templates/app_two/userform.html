@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Contact form</title>
+  </head>
+  <body>
+    <h1>Please fill out the form. We'll contact you when we go live!</h1>
+    <div class="container">
+      <form method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" class="btn btn-primary" name="" value="submit">
+      </form>
+
+    </div>
+  </body>
+</html>
