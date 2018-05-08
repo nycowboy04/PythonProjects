@@ -12,12 +12,18 @@
           <li> <a class="navbar-brand" href="{%url 'index'%}">Home</a> </li>
           <li> <a class="navbar-link"href="{% admin:index %}">Admin</a> </li>
           <li> <a class="navbar-link"href="{% url 'basic_app:register'%}">Register</a> </li>
+
+          {% if user.is_authenticated %}
+            <li> <a class='navbar-link' href="{%url 'logout' %}">LOGOUT</a> </li>
+          {% else %}
+            <li> <a class="navbar-link" href="{% url 'basic_app:user_login'%}">LOGIN</a> </li>
+          {% endif %}
         </ul>
       </div>
     </nav>
     <div class="container">
       {% block body %}
-      {% endblock %}    
+      {% endblock %}
     </div>
     {% block body %}
     {% endblock %}
