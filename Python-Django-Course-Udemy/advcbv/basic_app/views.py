@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, View,ListView,DetailView
 
+from . import models
 class IndexView(TemplateView):
     template_name='index.html'
 
@@ -8,3 +9,10 @@ class IndexView(TemplateView):
         context=super().get_context_data(**kwargs)
         context['injectme']='Basic Injection'
         return context
+
+class SchoolListView(ListView):
+    model = models.School
+
+class SchoolDetailView(DetailView):
+    model=models.School
+    template_name='basic_app/school_detail.html'
