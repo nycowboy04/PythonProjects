@@ -12,7 +12,9 @@ class IndexView(TemplateView):
 
 class SchoolListView(ListView):
     model = models.School
-
+    context_object_name = 'schools'
+    
 class SchoolDetailView(DetailView):
     model=models.School
+    context_object_name='school_detail'
     template_name='basic_app/school_detail.html'
